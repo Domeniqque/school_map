@@ -2,8 +2,11 @@
   "name": "school_map",
   "version": "0.1.0",
   "description": "It displays the schools of the State of Rondônia in a friendly and simple interface.",
-  "main": "src/index.js",
+  "main": "index.html",
   "repository": "https://gitlab.com/Dylluar/school_map",
   "author": "Domeniqque Dylluar",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "google-maps": "^3.2.1"
+  }
 }
