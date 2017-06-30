@@ -8,6 +8,7 @@
       #map {
         height: 100%;
       }
+
       html, body {
         height: 100%;
         margin: 0;
@@ -17,9 +18,14 @@
   </head>
   <body>
     <div id="map"></div>
-   	<script src="src/index.js"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbmb9Jbkvq9dnlZuPfffUuyt4-vfdfJD8&callback=initMap">
+    <script src="src/Map.js"></script>
+    <script>
+      let map = new Map({
+        el: '#map',
+        api_key: 'AIzaSyDsxBNJeFRZiQl7yb3uANsS9R--Gu4nEew'
+      })
+
+      map.init()
     </script>
   </body>
 </html>
