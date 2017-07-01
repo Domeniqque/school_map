@@ -1,5 +1,5 @@
 
-class Map {
+export class Map {
   constructor (param) {
 
     if (param.el === undefined) {

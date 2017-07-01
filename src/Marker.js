@@ -1,10 +1,5 @@
-const DEFAULT = {
-  school: {
-    icon: 'public/img/school.png'
-  }
-}
 
-class Marker {
+export class Marker {
   constructor({map, icons}) {
     this.setMap(map)
     this.setIcons(icons)
@@ -19,6 +14,12 @@ class Marker {
   }
 
   setIcons (icons) {
+    const DEFAULT = {
+      school: {
+        icon: 'public/img/school.png'
+      }
+    }
+
     this._icons = Object.assign({}, DEFAULT, icons)
   }
 

@@ -1,4 +1,6 @@
-const features =  []
+import { axios } from 'axios'
+
+const features =  [];
 
 let map = new Map({
   el: '#map',

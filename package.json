@@ -7,6 +7,8 @@
   "author": "Domeniqque Dylluar",
   "license": "MIT",
   "dependencies": {
-    "google-maps": "^3.2.1"
+    "axios": "^0.16.2"
+  },
+  "devDependencies": {
   }
 }

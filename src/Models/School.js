@@ -1,4 +1,4 @@
-class School {
+export class School {
   constructor (data) {
     this._data = data
     Object.freeze(this)
@@ -21,6 +21,6 @@ class School {
   }
 
   get longitude () {
-    return this.longitude 
+    return this.longitude
   }
 }
