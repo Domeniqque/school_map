@@ -1,4 +1,4 @@
-const features =  []
+const features = [];
 
 let map = new Map({
   el: '#map',
@@ -10,6 +10,6 @@ let map = new Map({
     }
   },
   features
-})
+});
 
-map.init()
+map.init();

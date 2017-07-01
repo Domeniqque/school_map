@@ -1,3 +1,4 @@
+
 class Map {
   constructor (param) {
 
@@ -13,6 +14,7 @@ class Map {
     this._api_key = param.api_key
 
     this.setOptions(param.options)
+    this.setFeatures(param.features)
   }
 
   /**
@@ -32,6 +34,12 @@ class Map {
     this._options = Object.assign({}, DEFAULT, options)
   }
 
+  setFeatures (features) {
+    this._features = features || {}
+
+    console.log(this._features);
+  }
+
   /**
    * Draw google maps in the window
    *
@@ -41,7 +49,9 @@ class Map {
     this.createGoogleMaps()
           .then(() => {
             this.initGoogleMaps()
-          }).catch((err) => {
+                .createMarkers(this._features)
+          })
+          .catch((err) => {
             console.error(`Opa. Algo deu errado! ${err}`);
           })
 
@@ -73,6 +83,8 @@ class Map {
    */
   initGoogleMaps () {
     this.gmap = new google.maps.Map(this._el, this.options)
+
+    return this
   }
 
   /**
@@ -86,5 +98,15 @@ class Map {
       center: new google.maps.LatLng(this._options.center.lat, this._options.center.lng),
       mapTypeId: this._options.mapTypeId
     }
+  }
+
+  createMarkers (features) {
+    const Marker = new Marker({
+      map: this.gmap
+    })
+
+    features.forEach((feature) => {
+      Marker.create(feature)
+    })
   }
 }
