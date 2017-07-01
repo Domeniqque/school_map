@@ -1,21 +1,16 @@
 import { Marker } from './Marker'
 
 export class Map {
-  constructor (param) {
+  constructor ({el, api_key, options}) {
+    if (el === undefined) throw new Error('Element not defined!')
 
-    if (param.el === undefined) {
-      throw new Error('Element not defined!')
-    }
+    if (api_key === undefined) throw new Error('Google Api key not defined!')
 
-    if (param.api_key === undefined) {
-      throw new Error('Google Api key not defined!')
-    }
+    this._el = document.querySelector(el)
+    this._api_key = api_key
+    this.setOptions(options)
 
-    this._el = document.querySelector(param.el)
-    this._api_key = param.api_key
-
-    this.setOptions(param.options)
-    this.setFeatures(param.features)
+    return this.init()
   }
 
   /**
@@ -35,28 +30,17 @@ export class Map {
     this._options = Object.assign({}, DEFAULT, options)
   }
 
-  setFeatures (features) {
-    this._features = features || {}
-
-    console.log(this._features);
-  }
-
   /**
    * Draw google maps in the window
    *
-   * @return {Object} Map
+   * @return {Promise}
    */
   init () {
-    this.createGoogleMaps()
-          .then(() => {
-            this.initGoogleMaps()
-                .createMarkers(this._features)
-          })
-          .catch((err) => {
-            console.error(`Opa. Algo deu errado! ${err}`);
-          })
-
-    return this
+    return this.createGoogleMaps()
+                  .then(() => this.initGoogleMaps())
+                  .catch((err) => {
+                    console.error(`Opa. Algo deu errado! ${err}`);
+                  })
   }
 
   /**
@@ -100,14 +84,18 @@ export class Map {
       mapTypeId: this._options.mapTypeId
     }
   }
-
+  /**
+   * Create markers in map
+   * @param  {array} features Array of markers
+   * @return {void}          
+   */
   createMarkers (features) {
-    const Marker = new Marker({
+    const marker = new Marker({
       map: this.gmap
     })
 
     features.forEach((feature) => {
-      Marker.create(feature)
+      marker.create(feature)
     })
   }
 }

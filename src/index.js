@@ -1,7 +1,5 @@
-import { axios } from 'axios'
 import { Map } from './Map'
-
-const features =  [];
+import { schools } from './../mock'
 
 let map = new Map({
   el: '#map',
@@ -11,8 +9,15 @@ let map = new Map({
       lat: -8.75956270,
       lng: -63.90944930
     }
-  },
-  features
+  }
 })
 
-map.init()
+map.then((self) => {
+
+  const features =  [{
+    position: new google.maps.LatLng(-8.75956270, -63.90944930),
+    type: 'school'
+  }]
+
+  self.createMarkers(features)
+})

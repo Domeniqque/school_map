@@ -6,7 +6,7 @@ export class Marker {
   }
 
   setMap (map) {
-    if (map === undefined || typeof map != Object) {
+    if (map === undefined || typeof map != 'object') {
       throw new Error('Map object not defined')
     }
 
@@ -16,7 +16,7 @@ export class Marker {
   setIcons (icons) {
     const DEFAULT = {
       school: {
-        icon: 'public/img/school.png'
+        icon: 'build/img/school.png'
       }
     }
 

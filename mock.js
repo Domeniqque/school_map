@@ -1,4 +1,4 @@
-const schools = [
+export const schools = [
   {
     'inep': '11043946',
     'descricao': 'AMA - ASSOC PAIS AMIGOS AUTISTA',
@@ -3241,5 +3241,3 @@ const schools = [
     'longitude': '0.00000000'
   }
 ]
-
-module.exports = schools
