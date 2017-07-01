@@ -1,18 +1,26 @@
 class Map {
-  constructor ({el, api_key}) {
+  constructor (param) {
 
-    if (el === undefined) {
+    if (param.el === undefined) {
       throw new Error('Element not defined!')
     }
 
-    if (api_key === undefined) {
+    if (param.api_key === undefined) {
       throw new Error('Google Api key not defined!')
     }
 
-    this._el = document.querySelector(el)
-    this._api_key = api_key
+    this._el = document.querySelector(param.el)
+    this._api_key = param.api_key
 
-    this._options = {
+    this.setOptions(param.options)
+  }
+
+  /**
+   * Set the options of Google Maps
+   * @param {Object} options
+   */
+  setOptions (options) {
+    const DEFAULT = {
       zoom: 16,
       center: {
         lat: -33.91722,
@@ -20,20 +28,26 @@ class Map {
       },
       mapTypeId: 'roadmap'
     }
+
+    this._options = Object.assign({}, DEFAULT, options)
   }
 
   /**
    * Draw google maps in the window
+   *
    * @return {void}
    */
   init () {
     this.createGoogleMaps()
           .then(() => {
             this.initGoogleMaps()
-          }, () => {
-            console.error("Não funfa :(");
+          }).catch((err) => {
+            console.error(`Opa. Algo deu errado! ${err}`);
           })
+          
+    return this
   }
+
   /**
    * Create a Google Maps Api source script and append it in body element
    *
@@ -54,13 +68,16 @@ class Map {
 
   /**
    * Create a new Google Maps Instance
+   *
    * @return {[type]} [description]
    */
   initGoogleMaps () {
     this.gmap = new google.maps.Map(this._el, this.options)
   }
+
   /**
    * Return the options of the Google Maps
+   *
    * @return {Object}
    */
   get options () {
