@@ -6,9 +6,13 @@
   "repository": "https://gitlab.com/Dylluar/school_map",
   "author": "Domeniqque Dylluar",
   "license": "MIT",
+  "scripts": {
+      "dev": "webpack" 
+  },
   "dependencies": {
     "axios": "^0.16.2"
   },
   "devDependencies": {
+    "webpack": "^3.0.0"
   }
 }

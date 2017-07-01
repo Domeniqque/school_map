@@ -1,4 +1,5 @@
 import { axios } from 'axios'
+import { Map } from './Map'
 
 const features =  [];
 

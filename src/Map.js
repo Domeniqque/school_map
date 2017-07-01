@@ -1,3 +1,4 @@
+import { Marker } from './Marker'
 
 export class Map {
   constructor (param) {
