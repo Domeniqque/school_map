@@ -35,7 +35,7 @@ class Map {
   /**
    * Draw google maps in the window
    *
-   * @return {void}
+   * @return {Object} Map
    */
   init () {
     this.createGoogleMaps()
@@ -44,7 +44,7 @@ class Map {
           }).catch((err) => {
             console.error(`Opa. Algo deu errado! ${err}`);
           })
-          
+
     return this
   }
 
