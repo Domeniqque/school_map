@@ -87,11 +87,16 @@ export class Map {
   /**
    * Create markers in map
    * @param  {array} features Array of markers
-   * @return {void}          
+   * @return {void}
    */
   createMarkers (features) {
     const marker = new Marker({
-      map: this.gmap
+      map: this.gmap,
+      icons: {
+        school: {
+          icon: 'build/img/school.png'
+        }
+      }
     })
 
     features.forEach((feature) => {

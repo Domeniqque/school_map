@@ -74,7 +74,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-let map = new __WEBPACK_IMPORTED_MODULE_0__Map__["a" /* Map */]({
+const map = new __WEBPACK_IMPORTED_MODULE_0__Map__["a" /* Map */]({
   el: '#map',
   api_key: 'AIzaSyDsxBNJeFRZiQl7yb3uANsS9R--Gu4nEew',
   options: {
@@ -86,13 +86,15 @@ let map = new __WEBPACK_IMPORTED_MODULE_0__Map__["a" /* Map */]({
 })
 
 map.then((self) => {
+  let features = __WEBPACK_IMPORTED_MODULE_1__mock__["a" /* schools */].map((school) => {
+    return {
+      position: new google.maps.LatLng(school.latitude, school.longitude),
+      type: 'school',
+      title: school.descricao
+    }
+  })
 
-  const features =  [{
-    position: new google.maps.LatLng(-8.75956270, -63.90944930),
-    type: 'school'
-  }]
-
-  self.createMarkers(features)
+  //self.createMarkers(features)
 })
 
 
@@ -188,10 +190,19 @@ class Map {
       mapTypeId: this._options.mapTypeId
     }
   }
-
+  /**
+   * Create markers in map
+   * @param  {array} features Array of markers
+   * @return {void}
+   */
   createMarkers (features) {
     const marker = new __WEBPACK_IMPORTED_MODULE_0__Marker__["a" /* Marker */]({
-      map: this.gmap
+      map: this.gmap,
+      icons: {
+        school: {
+          icon: 'build/img/school.png'
+        }
+      }
     })
 
     features.forEach((feature) => {
@@ -215,6 +226,10 @@ class Marker {
     this.setIcons(icons)
   }
 
+  /**
+   * Set the Google Map opject of markers
+   * @param {object} map Google Map object
+   */
   setMap (map) {
     if (map === undefined || typeof map != 'object') {
       throw new Error('Map object not defined')
@@ -223,10 +238,14 @@ class Marker {
     this._map = map
   }
 
-  setIcons (icons) {
+  /**
+   * Configure the type icons of the markers
+   * @param {object} icons [description]
+   */
+  setIcons (icons = {}) {
     const DEFAULT = {
-      school: {
-        icon: 'build/img/school.png'
+      default: {
+        icon: undefined
       }
     }
 
@@ -234,10 +253,16 @@ class Marker {
   }
 
   create (feature) {
+    let icon = feature.type != undefined
+        ? this._icons[feature.type].icon
+        : undefined;
+
     new google.maps.Marker({
       position: feature.position,
-      icon: this._icons[feature.type].icon,
-      map: this._map
+      icon: icon,
+      map: this._map,
+      animation: google.maps.Animation.DROP,
+      title: feature.title
     });
   }
 }
@@ -3493,7 +3518,7 @@ const schools = [
     'longitude': '0.00000000'
   }
 ]
-/* unused harmony export schools */
+/* harmony export (immutable) */ __webpack_exports__["a"] = schools;
 
 
 
