@@ -94,7 +94,7 @@ map.then((self) => {
     }
   })
 
-  //self.createMarkers(features)
+  self.createMarkers(features)
 })
 
 
